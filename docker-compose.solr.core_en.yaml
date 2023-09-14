@@ -1,0 +1,7 @@
+#ddev-generated
+services:
+  solr:
+    environment:
+      - SOLR_CORENAME=core_en
+      - SOLR_SCHEMA=english/schema.xml
+      - SOLR_CONFIGSET=ext_solr_12_0_0
