@@ -8,8 +8,7 @@ set -e
 CORENAME=${SOLR_CORENAME:-dev}
 CONFIGSET=${SOLR_CONFIGSET:-dev}
 SCHEMA=${SOLR_SCHEMA:-dev}
-if [ -d /var/solr/data/${CORENAME}/conf ]; then
-    cp /solr-conf/conf/* /var/solr/data/${CORENAME}/conf
-    curl -s -o /dev/null "http://${DDEV_SITENAME}.dev.local:8983/solr/admin/cores?action=CREATE&name=${CORENAME}&configSet=${CONFIGSET}&schema=${SCHEMA}&dataDir=data/"
 
+if [ -d /var/solr/data/${CORENAME}/conf ]; then
+    curl -s -o /dev/null "http://${DDEV_SITENAME}.dev.local:8983/solr/admin/cores?action=CREATE&name=${CORENAME}&configSet=${CONFIGSET}&schema=${SCHEMA}&dataDir=data/"
 fi

@@ -59,8 +59,6 @@ pre_install_actions:
 # DDEV environment variables can be interpolated into these filenames
 project_files:
 - commands/solr/solr
-- commands/solr/update
-- solr/*
 - docker-compose.solr.yaml
 - docker-compose.solr.core_en.yaml
 
