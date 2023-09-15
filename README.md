@@ -12,13 +12,19 @@ for local development requirements.
 
 ## Getting started
 
-1. Install the addon
+1. Install apache-solr-for-typo3/solr
+
+    ```shell
+    ddev composer req "apache-solr-for-typo3/solr:^12.0"
+    ```
+
+2. Install the addon
 
     ```shell
     ddev get carsten-walther/ddev-typo3-solr
     ```
 
-2. Restart DDEV to start the addon.
+3. Restart DDEV to start the addon.
 
    ```shell
    ddev restart
