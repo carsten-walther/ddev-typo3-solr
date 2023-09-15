@@ -58,9 +58,8 @@ pre_install_actions:
 # if it hasn't been modified by the user.
 # DDEV environment variables can be interpolated into these filenames
 project_files:
-#- commands/solr/solr
-- solr/conf
-- solr/docker-entrypoint-initdb.d/solr-configupdate.sh
+- commands/solr/solr
+- solr
 - docker-compose.solr.yaml
 
 # List of files and directories that are copied into the global .ddev directory
@@ -74,9 +73,6 @@ post_install_actions:
 # - chmod +x ~/.ddev/commands/web/somecommand
 # - touch somefile.${GOOS}.${DDEV_WEBSERVER}
 # - perl -pi -e 's/oldstring/newstring/g' docker-compose.addon-template.yaml
-- |
-  #ddev-description:Make sure solr-configupdate.sh is executable
-  chmod +x solr/docker-entrypoint-initdb.d/solr-configupdate.sh
 
 # Shell actions that can be done during removal of the add-on
 removal_actions:
