@@ -10,10 +10,10 @@ pre_install_actions:
 
 project_files:
 - commands/solr/solr
-- solr
 - docker-compose.solr.yaml
 
 post_install_actions:
+- mkdir ${DDEV_APPROOT}/.ddev/solr
 - cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/configsets ${DDEV_APPROOT}/.ddev/solr
 - cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/cores ${DDEV_APPROOT}/.ddev/solr
 - cp ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/solr.xml ${DDEV_APPROOT}/.ddev/solr/solr.xml
