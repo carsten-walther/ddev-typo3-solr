@@ -2,13 +2,11 @@ name: ddev-typo3-solr
 
 pre_install_actions:
 - |
-  if [ -f ${DDEV_APPROOT}/composer.json ]; then
-    ddev composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
-  else
-    ddev composer init --name typo3-default-website --description typo3-default-website --no-interaction
-    ddev composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
+  if [ ! -d ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr ]; then
+    echo "Package apache-solr-for-typo3/solr is not installed but is required." && 
+    echo "You have to install it with 'ddev composer req \"apache-solr-for-typo3/solr:^12.0\"'" && 
+    exit 2
   fi
-  ddev composer req "apache-solr-for-typo3/solr:^12.0"
 
 project_files:
 - commands/solr/solr
@@ -19,6 +17,7 @@ post_install_actions:
 - cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/configsets ${DDEV_APPROOT}/.ddev/solr
 - cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/cores ${DDEV_APPROOT}/.ddev/solr
 - cp ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/solr.xml ${DDEV_APPROOT}/.ddev/solr/solr.xml
+
 
 removal_actions:
 - rm -rf ${DDEV_APPROOT}/.ddev/solr
