@@ -5,7 +5,7 @@ pre_install_actions:
   if [ -f ${DDEV_APPROOT}/composer.json ]; then
     ddev composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
   else
-    ddev composer init
+    ddev composer init --name typo3-default-website --description typo3-default-website --no-interaction
     ddev composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
   fi
   ddev composer req "apache-solr-for-typo3/solr:^12.0"
