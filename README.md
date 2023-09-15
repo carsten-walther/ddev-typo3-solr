@@ -15,7 +15,7 @@ for local development requirements.
 1. Install apache-solr-for-typo3/solr
 
     ```shell
-    ddev composer req "apache-solr-for-typo3/solr:^12.0"
+    ddev composer req "apache-solr-for-typo3/solr:^12.0.0-beta-1"
     ```
 
 2. Install the addon
