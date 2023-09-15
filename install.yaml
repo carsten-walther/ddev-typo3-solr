@@ -1,6 +1,7 @@
 name: ddev-typo3-solr
 
 pre_install_actions:
+- ddev composer config --no-plugins allow-plugins.typo3/cms-composer-installers true
 - ddev composer req "apache-solr-for-typo3/solr:^12.0.0-beta-1"
 
 project_files:
