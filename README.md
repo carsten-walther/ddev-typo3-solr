@@ -18,13 +18,17 @@ for local development requirements.
     ddev get carsten-walther/ddev-typo3-solr
     ```
 
-2. Restart DDEV to start the addon.
+2. Select solr version
+
+   Visit [https://hub.docker.com/r/typo3solr/ext-solr/tags](https://hub.docker.com/r/typo3solr/ext-solr/tags) and select your preferred solr version depending on your TYPO3 and solr needs.
+
+3. Restart DDEV to start the addon.
 
    ```shell
    ddev restart
    ```
 
-3. Install TYPO3 solr extension.
+4. Install TYPO3 solr extension.
 
    ```shell
    ddev composer req "apache-solr-for-typo3/solr:^12.0.0-beta-1"

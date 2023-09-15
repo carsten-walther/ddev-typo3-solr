@@ -72,6 +72,9 @@ post_install_actions:
 # - chmod +x ~/.ddev/commands/web/somecommand
 # - touch somefile.${GOOS}.${DDEV_WEBSERVER}
 # - perl -pi -e 's/oldstring/newstring/g' docker-compose.addon-template.yaml
+- cp -r conf/configsets ~/.ddev/server/solr
+- cp conf/solr.xml ~/.ddev/server/solr/solr.xml
+- cp -r conf/cores ~/.ddev/server/solr
 
 # Shell actions that can be done during removal of the add-on
 removal_actions:
