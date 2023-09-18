@@ -4,6 +4,7 @@
 
 - [What is ddev-typo3-solr?](#what-is-ddev-typo3-solr)
 - [Getting started](#getting-started)
+- [Using cores](#using-cores)
 
 ## What is ddev-typo3-solr?
 
@@ -35,5 +36,39 @@ Once up and running, access Solr's UI within your browser by opening
 "myproject" the hostname will be `http://myproject.ddev.site:8983`.
 
 To access the Solr container from DDEV's web container, use  `http://solr:8983`.
+
+## Using cores
+
+Set your desired language core to the language in your sites/XXX/config.yaml.
+
+```yaml
+base: 'https://%env(DDEV_SITENAME)%.%env(DDEV_TLD)%/'
+...
+languages:
+  -
+    title: English
+    enabled: true
+    languageId: 0
+    base: /
+    locale: en_US.UTF-8
+    navigationTitle: English
+    flag: us
+    hreflang: 'en-US'
+    websiteTitle: 'TYPO3 Website'
+    solr_core_read: core_en
+
+rootPageId: 1
+...
+solr_enabled_read: true
+solr_host_read: '%env(DDEV_SITENAME)%.%env(DDEV_TLD)%'
+solr_path_read: /solr/
+solr_port_read: '8983'
+solr_scheme_read: http
+solr_use_write_connection: false
+...
+websiteTitle: 'TYPO3 Website'
+```
+
+You are able to use the DDEV constants in yout local environment. Keep in mind to replace them in production to the coorect one.
 
 **Contributed and maintained by [@carsten-walther](https://github.com/carsten-walther)**
