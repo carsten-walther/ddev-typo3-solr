@@ -1,4 +1,4 @@
-[![tests](https://github.com/carsten-walther/ddev-typo3-solr/actions/workflows/tests.yml/badge.svg)](https://github.com/carsten-walther/ddev-typo3-solr/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
+![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
 
 # ddev-typo3-solr <!-- omit in toc -->
 
