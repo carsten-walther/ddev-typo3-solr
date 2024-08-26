@@ -2,7 +2,7 @@
 services:
  solr:
    container_name: ddev-${DDEV_SITENAME}-solr
-   image: typo3solr/ext-solr:12.0.x-dev
+   image: typo3solr/ext-solr:12.0.5
    restart: no
    expose:
      - 8983
