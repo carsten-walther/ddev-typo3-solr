@@ -5,7 +5,7 @@ pre_install_actions:
   if [ ! -d ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr ]; then
     echo "Package apache-solr-for-typo3/solr is not installed but is required." && 
     echo "You have to install it with 'ddev composer req \"apache-solr-for-typo3/solr:^12.0.5\"'" && 
-    exit 2
+#    exit 2
   fi
 
 project_files:
