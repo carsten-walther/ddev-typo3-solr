@@ -1,22 +1,20 @@
-name: ddev-typo3-solr
+name: ddev-${DDEV_SITENAME}-solr
 
 pre_install_actions:
 - |
   if [ ! -d ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr ]; then
-    echo "Package apache-solr-for-typo3/solr is not installed but is required." && 
-    echo "You have to install it with 'ddev composer req \"apache-solr-for-typo3/solr:^12.0.5\"'"
+    echo "Package apache-solr-for-typo3/solr is not installed but is required and will be installed automatically." && \
+    ddev composer req "apache-solr-for-typo3/solr"
+  else
+    echo "Package apache-solr-for-typo3/solr already exists."
   fi
 
 project_files:
 - commands/solr/solr
 - docker-compose.solr.yaml
 
-#post_install_actions:
-#- mkdir ${DDEV_APPROOT}/.ddev/solr
-#- cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/configsets ${DDEV_APPROOT}/.ddev/solr
-#- cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/cores ${DDEV_APPROOT}/.ddev/solr
-#- cp ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/solr.xml ${DDEV_APPROOT}/.ddev/solr/solr.xml
-
+post_install_actions:
+- cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/* ${DDEV_APPROOT}/.ddev/solr/data
 
 removal_actions:
 - rm -rf ${DDEV_APPROOT}/.ddev/solr
