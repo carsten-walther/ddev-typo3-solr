@@ -8,6 +8,7 @@ setup() {
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME}
+  ddev composer create "typo3/cms-base-distribution:^12"
   ddev start -y >/dev/null
 }
 
@@ -35,16 +36,16 @@ teardown() {
   set -eu -o pipefail
   cd ${TESTDIR}
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ${DIR} >/dev/null 2>&1
-  ddev mutagen sync >/dev/null 2>&1
+  ddev get ${DIR}
+  ddev restart
   health_checks
 }
 
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get carsten-walther/ddev-typo3-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get carsten-walther/ddev-typo3-solr >/dev/null 2>&1
-  ddev restart >/dev/null 2>&1
+  echo "# ddev get ddev/ddev-addon-template with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev get ddev/ddev-addon-template
+  ddev restart >/dev/null
   health_checks
 }
