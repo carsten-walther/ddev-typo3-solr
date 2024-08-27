@@ -1,0 +1,14 @@
+#!/bin/bash
+
+## #ddev-generated: If you want to edit and own this file, remove this line.
+## Description: Launch a browser with solr
+## Usage: solr
+## Example: "ddev solr"
+
+DDEV_SOLR_PORT=8983
+DDEV_SOLR_HTTPS_PORT=8984
+if [ ${DDEV_PRIMARY_URL%://*} = "http" ] || [ -n "${GITPOD_WORKSPACE_ID:-}" ] || [ "${CODESPACES:-}" = "true" ]; then
+    ddev launch :$DDEV_SOLR_PORT
+else
+    ddev launch :$DDEV_SOLR_HTTPS_PORT
+fi
