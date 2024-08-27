@@ -7,10 +7,9 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME} --default-container-timeout 240
+  ddev config --project-name=${PROJNAME} --default-container-timeout 360
   ddev start -y >/dev/null
   ddev composer create "typo3/cms-base-distribution:^12"
-  ddev restart -y >/dev/null
 }
 
 health_checks() {
