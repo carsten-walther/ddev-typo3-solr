@@ -17,12 +17,12 @@ health_checks() {
   # ddev restart is required because we have done `ddev get` on a new service
   run ddev restart
   assert_success
-  # Make sure we can hit the 8037 port successfully
-  curl -s -I -f  http://${PROJNAME}.ddev.site:8983 >/tmp/curlout.txt
+  # Make sure we can hit the 8983 port successfully
+  curl -s -I -f  http://127.0.0.1:8983/solr/ >/tmp/curlout.txt
   # Make sure `ddev solr` works
   DDEV_DEBUG=true run ddev solr
   assert_success
-  assert_output --partial "FULLURL http://${PROJNAME}.ddev.site:8983"
+  assert_output --partial "FULLURL http://127.0.0.1:8983/solr/"
 }
 
 teardown() {
