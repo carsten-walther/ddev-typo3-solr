@@ -15,8 +15,11 @@ project_files:
 
 post_install_actions:
 - mkdir -p ${DDEV_APPROOT}/.ddev/solr/data
+- echo "Coping solr core files to .ddev/solr project folder."
 - cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/* ${DDEV_APPROOT}/.ddev/solr/data
 
 removal_actions:
+- echo "Removing .ddev/solr project folder."
 - rm -rf ${DDEV_APPROOT}/.ddev/solr
+- echo "Removing package apache-solr-for-typo3/solr."
 - ddev composer remove "apache-solr-for-typo3/solr"
