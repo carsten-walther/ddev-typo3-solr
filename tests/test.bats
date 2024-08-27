@@ -17,7 +17,6 @@ health_checks() {
   ddev restart
   # Make sure the custom `ddev solr` command works
   ddev solr | grep COMMAND >/dev/null
-  ddev solr | grep COMMAND
 }
 
 teardown() {
