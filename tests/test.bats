@@ -1,15 +1,16 @@
 setup() {
   set -eu -o pipefail
   export DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
-  export TESTDIR=~/tmp/test-ddev-typo3-solr
+  export TESTDIR=~/tmp/test-solr
   mkdir -p $TESTDIR
-  export PROJNAME=test-ddev-typo3-solr
+  export PROJNAME=test-solr
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME}
-  ddev composer create "typo3/cms-base-distribution:^12"
   ddev start -y >/dev/null
+  ddev composer create "typo3/cms-base-distribution:^12"
+  ddev restart -y >/dev/null
 }
 
 health_checks() {
