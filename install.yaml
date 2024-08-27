@@ -1,4 +1,4 @@
-name: ddev-${DDEV_SITENAME}-solr
+name: ddev-typo3-solr
 
 pre_install_actions:
 - |
