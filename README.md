@@ -1,4 +1,5 @@
-![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
+[![tests](https://github.com/carsten-walther/ddev-typo3-solr/actions/workflows/tests.yml/badge.svg)](https://github.com/carsten-walther/ddev-typo3-solr/actions/workflows/tests.yml) ![project is maintained](https://img.shields.io/maintenance/yes/2024.svg)
+
 
 # ddev-typo3-solr <!-- omit in toc -->
 
@@ -13,17 +14,14 @@ for local development requirements.
 
 ## Getting started
 
-1. Install apache-solr-for-typo3/solr
+1. Install the addon
 
-    ```shell
-    ddev composer req "apache-solr-for-typo3/solr:^12.0.5"
-    ```
-
-2. Install the addon
+   Installation is very simple. Run:
 
     ```shell
     ddev get carsten-walther/ddev-typo3-solr
     ```
+    This will install the php package `apache-solr-for-typo3/solr`, create the `.ddev/solr` project folder and coping all the available cores from the php package to the solr project folder.
 
 3. Restart DDEV to start the addon.
 
@@ -56,12 +54,24 @@ languages:
     hreflang: 'en-US'
     websiteTitle: 'TYPO3 Website'
     solr_core_read: core_en
-
+  -
+    title: Deutsch
+    enabled: true
+    languageId: 1
+    base: /
+    locale: de_DE.UTF-8
+    navigationTitle: Deutsch
+    flag: de
+    hreflang: 'de-DE'
+    websiteTitle: 'TYPO3 Website'
+    solr_core_read: core_de
+  -
+    ...
 rootPageId: 1
 ...
 solr_enabled_read: true
 solr_host_read: '%env(DDEV_SITENAME)%.%env(DDEV_TLD)%'
-solr_path_read: /solr/
+solr_path_read: /
 solr_port_read: '8983'
 solr_scheme_read: http
 solr_use_write_connection: false
@@ -71,4 +81,8 @@ websiteTitle: 'TYPO3 Website'
 
 You are able to use the DDEV constants in yout local environment. Keep in mind to replace them in production to the coorect one.
 
-**Contributed and maintained by [@carsten-walther](https://github.com/carsten-walther)**
+**Maintainer**
+- [@carsten-walther](https://github.com/carsten-walther)
+
+**Contributers**
+- [@erik-konrad](https://github.com/erik-konrad)
