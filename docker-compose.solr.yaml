@@ -11,6 +11,7 @@ services:
     ports:
       - "8983:8983"
     volumes:
+      - .:/mnt/ddev_config
       - ./solr:/var/solr
     command:
       - solr-precreate
