@@ -1,25 +1,27 @@
-name: ddev-typo3-solr
+name: solr
 
 pre_install_actions:
 - |
   if [ ! -d ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr ]; then
-    echo "Package apache-solr-for-typo3/solr is not installed but is required and will be installed automatically." && \
-    ddev composer req "apache-solr-for-typo3/solr"
+    echo "Package apache-solr-for-typo3/solr is not installed but is required and will be installed automatically."
+    ddev composer -q -n req "apache-solr-for-typo3/solr" >/dev/null
   else
     echo "Package apache-solr-for-typo3/solr already exists."
   fi
 
 project_files:
-- commands/solr/
+- commands/host/
 - docker-compose.solr.yaml
 
 post_install_actions:
-- mkdir -p ${DDEV_APPROOT}/.ddev/solr/data
-- echo "Coping solr core files to .ddev/solr project folder."
-- cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/* ${DDEV_APPROOT}/.ddev/solr/data
+- |
+  mkdir -p ${DDEV_APPROOT}/.ddev/solr/data
+  echo "Coping solr core files to .ddev/solr project folder."
+  cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/* ${DDEV_APPROOT}/.ddev/solr/data
 
 removal_actions:
-- echo "Removing .ddev/solr project folder."
-- rm -rf ${DDEV_APPROOT}/.ddev/solr
-- echo "Removing package apache-solr-for-typo3/solr."
-- ddev composer remove "apache-solr-for-typo3/solr"
+- |
+  echo "Removing .ddev/solr project folder."
+  rm -rf ${DDEV_APPROOT}/.ddev/solr >/dev/null
+  echo "Removing php package apache-solr-for-typo3/solr."
+  ddev composer -q -n remove "apache-solr-for-typo3/solr" >/dev/null

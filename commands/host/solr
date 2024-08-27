@@ -6,7 +6,8 @@
 ## Example: "ddev solr"
 
 DDEV_SOLR_PORT=8983
-DDEV_SOLR_HTTPS_PORT=8984
+DDEV_SOLR_HTTPS_PORT=8943
+
 if [ ${DDEV_PRIMARY_URL%://*} = "http" ] || [ -n "${GITPOD_WORKSPACE_ID:-}" ] || [ "${CODESPACES:-}" = "true" ]; then
     ddev launch :$DDEV_SOLR_PORT
 else
