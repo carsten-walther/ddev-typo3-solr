@@ -1,3 +1,0 @@
-#!/bin/bash
-#ddev-generated
-solr zk -z localhost:9983 "$@"

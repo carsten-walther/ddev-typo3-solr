@@ -11,15 +11,14 @@ services:
     ports:
       - "8983:8983"
     volumes:
+      - .:/mnt/ddev_config
       - ./solr:/var/solr
     command:
       - solr-precreate
     environment:
+      VIRTUAL_HOST: $DDEV_HOSTNAME
       SOLR_HOST: ddev-${DDEV_SITENAME}-solr
       SOLR_PORT: 8983
-      VIRTUAL_HOST: $DDEV_HOSTNAME
-      
-      # The pre-trained OpenNLP models require a much bigger buffer.
       SOLR_OPTS: -Djute.maxbuffer=50000000
       SOLR_HEAP: 1g
   web:
