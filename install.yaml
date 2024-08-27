@@ -10,7 +10,7 @@ pre_install_actions:
   fi
 
 project_files:
-- commands/solr/solr
+- commands/solr/
 - docker-compose.solr.yaml
 
 post_install_actions:
