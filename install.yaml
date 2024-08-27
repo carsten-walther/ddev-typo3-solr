@@ -14,8 +14,9 @@ project_files:
 - docker-compose.solr.yaml
 
 post_install_actions:
-- mkdir ${DDEV_APPROOT}/.ddev/solr
+- mkdir -r ${DDEV_APPROOT}/.ddev/solr/data
 - cp -r ${DDEV_APPROOT}/vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/* ${DDEV_APPROOT}/.ddev/solr/data
 
 removal_actions:
 - rm -rf ${DDEV_APPROOT}/.ddev/solr
+- ddev composer remove "apache-solr-for-typo3/solr"
