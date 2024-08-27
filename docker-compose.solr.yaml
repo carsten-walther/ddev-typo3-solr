@@ -3,6 +3,8 @@ services:
   solr:
     container_name: ddev-${DDEV_SITENAME}-solr
     image: solr
+    restart: "no"
+    networks: [default, ddev_default]
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
