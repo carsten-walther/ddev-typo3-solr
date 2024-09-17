@@ -7,7 +7,7 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME} --default-container-timeout 360
+  ddev config --project-name=${PROJNAME} --project-type=typo3 --docroot=public --php-version 8.2 --default-container-timeout 360
   ddev start -y >/dev/null
   ddev composer create "typo3/cms-base-distribution:^12"
 }
@@ -15,8 +15,13 @@ setup() {
 health_checks() {
   # ddev restart is required because we have done `ddev get` on a new service
   ddev restart
-  # Make sure the custom `ddev solr` command works
-  ddev solr | grep COMMAND >/dev/null
+  assert_success
+  # Make sure we can hit the 8943 port successfully
+  curl -s -o /dev/null -I -w '%{http_code}' https://${PROJNAME}.ddev.site:8943/solr/admin/cores\?action\=STATUS >/tmp/curlout.txt
+  # Make sure `ddev solr` works
+  DDEV_DEBUG=true run ddev solr
+  assert_success
+  assert_output --partial "FULLURL https://${PROJNAME}.ddev.site:8943"
 }
 
 teardown() {
