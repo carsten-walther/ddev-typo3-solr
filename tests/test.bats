@@ -13,7 +13,8 @@ setup() {
   cd "${TESTDIR}"
   ddev config --project-name=${PROJNAME} --project-type=typo3 --docroot=public --php-version 8.2
   ddev start -y >/dev/null
-  #ddev composer create "typo3/cms-base-distribution:^12"
+  ddev composer create "typo3/cms-base-distribution:^12" >/dev/null
+  ddev restart #>/dev/null 2>&1
 }
 
 health_checks() {
