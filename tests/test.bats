@@ -1,5 +1,9 @@
 setup() {
   set -eu -o pipefail
+  brew_prefix=$(brew --prefix)
+  load "${brew_prefix}/lib/bats-support/load.bash"
+  load "${brew_prefix}/lib/bats-assert/load.bash"
+
   export DIR="$( cd "$( dirname "$BATS_TEST_FILENAME" )" >/dev/null 2>&1 && pwd )/.."
   export TESTDIR=~/tmp/test-solr
   mkdir -p $TESTDIR
@@ -7,14 +11,16 @@ setup() {
   export DDEV_NON_INTERACTIVE=true
   ddev delete -Oy ${PROJNAME} >/dev/null 2>&1 || true
   cd "${TESTDIR}"
-  ddev config --project-name=${PROJNAME} --project-type=typo3 --docroot=public --php-version 8.2 --default-container-timeout 360
-  ddev start -y >/dev/null
-  ddev composer create "typo3/cms-base-distribution:^12"
+  ddev config --project-name=${PROJNAME} --project-type=typo3 --docroot=public --php-version 8.2
+  #ddev config --omit-containers=dba >/dev/null 2>&1 || true
+  ddev start -y >/dev/null 2>&1
+  #ddev composer create "typo3/cms-base-distribution:^12"
 }
 
 health_checks() {
+  set +u # bats-assert has unset variables so turn off unset check
   # ddev restart is required because we have done `ddev get` on a new service
-  ddev restart
+  run ddev restart
   assert_success
   # Make sure we can hit the 8943 port successfully
   curl -s -o /dev/null -I -w '%{http_code}' https://${PROJNAME}.ddev.site:8943/solr/admin/cores\?action\=STATUS >/tmp/curlout.txt
@@ -35,8 +41,8 @@ teardown() {
   set -eu -o pipefail
   cd ${TESTDIR}
   echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ${DIR}
-  ddev restart
+  ddev get ${DIR} >/dev/null 2>&1
+  ddev mutagen sync >/dev/null 2>&1
   health_checks
 }
 
@@ -44,7 +50,7 @@ teardown() {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
   echo "# ddev get carsten-walther/ddev-typo3-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get carsten-walther/ddev-typo3-solr
-  ddev restart >/dev/null
+  ddev get carsten-walther/ddev-typo3-solr >/dev/null 2>&1
+  ddev restart >/dev/null 2>&1
   health_checks
 }
