@@ -14,7 +14,7 @@ setup() {
   ddev config --project-name=${PROJNAME} --project-type=typo3 --docroot=public --php-version 8.2
   ddev start -y >/dev/null
   ddev composer create "typo3/cms-base-distribution:^12" >/dev/null
-  ddev restart >/dev/null 2>&1
+  ddev restart >/dev/null
 }
 
 health_checks() {
@@ -33,24 +33,24 @@ health_checks() {
 teardown() {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  ddev delete -Oy ${PROJNAME} >/dev/null 2>&1
+  ddev delete -Oy ${PROJNAME} >/dev/null
   [ "${TESTDIR}" != "" ] && rm -rf ${TESTDIR}
 }
 
 @test "install from directory" {
   set -eu -o pipefail
   cd ${TESTDIR}
-  echo "# ddev get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get ${DIR} >/dev/null 2>&1
-  ddev mutagen sync >/dev/null 2>&1
+  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev add-on get ${DIR} >/dev/null
+  ddev mutagen sync >/dev/null
   health_checks
 }
 
 @test "install from release" {
   set -eu -o pipefail
   cd ${TESTDIR} || ( printf "unable to cd to ${TESTDIR}\n" && exit 1 )
-  echo "# ddev get carsten-walther/ddev-typo3-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
-  ddev get carsten-walther/ddev-typo3-solr #>/dev/null 2>&1
-  ddev restart >/dev/null 2>&1
+  echo "# ddev add-on get carsten-walther/ddev-typo3-solr with project ${PROJNAME} in ${TESTDIR} ($(pwd))" >&3
+  ddev add-on get carsten-walther/ddev-typo3-solr >/dev/null
+  ddev restart >/dev/null
   health_checks
 }
