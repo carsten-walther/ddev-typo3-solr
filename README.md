@@ -16,11 +16,20 @@ for local development requirements.
 
 1. Install the addon
 
-   Installation is very simple. Run:
+   Installation is very simple.
 
-    ```shell
-    ddev get carsten-walther/ddev-typo3-solr
-    ```
+   For DDEV v1.23.5 or above run
+
+   ```shell
+   ddev add-on get carsten-walther/ddev-typo3-solr
+   ```
+
+   For earlier versions of DDEV run
+
+   ```shell
+   ddev get carsten-walther/ddev-typo3-solr
+   ```
+
     This will install the php package `apache-solr-for-typo3/solr`, create the `.ddev/solr` project folder and coping all the available cores from the php package to the solr project folder.
 
 3. Restart DDEV to start the addon.
